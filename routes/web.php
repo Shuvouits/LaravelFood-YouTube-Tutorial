@@ -1,7 +1,15 @@
 <?php
 
+use App\Http\Controllers\backend\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
+
+//Admin Route
+
+Route::middleware(['auth', 'verified', 'roles:admin'])->prefix('admin')->name('admin.')->group(function () {
+ Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+});
 
 Route::get('/', function () {
     return view('welcome');
