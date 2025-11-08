@@ -161,20 +161,22 @@
                                  <span>Spports Tickets</span>
                              </a>
                          </li>
-                         <li>
-                             <a href="profile-setting.html">
-                                 <i data-feather="settings"></i>
-                                 <span>Settings</span>
-                             </a>
-                         </li>
 
 
-                      <li>
-                              <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="javascript:void(0)">
-                                  <i data-feather="log-out"></i>
-                                  <span>Log out</span>
+                        <li>
+                              <a href="{{ route('admin.setting.index') }}">
+                                  <i data-feather="settings"></i>
+                                  <span>Settings</span>
                               </a>
                           </li>
+
+
+                         <li>
+                             <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="javascript:void(0)">
+                                 <i data-feather="log-out"></i>
+                                 <span>Log out</span>
+                             </a>
+                         </li>
 
 
 

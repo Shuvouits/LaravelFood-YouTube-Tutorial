@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\admin\AdminProfileController;
 use App\Http\Controllers\backend\AdminController;
+use App\Http\Controllers\backend\SettingController;
 use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -11,8 +13,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
 
 Route::middleware(['auth', 'verified', 'roles:admin'])->prefix('admin')->name('admin.')->group(function () {
- Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-   Route::post('/logout', [AdminController::class, 'destroy'])->name('logout');
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::post('/logout', [AdminController::class, 'destroy'])->name('logout');
+
+    /* Control Setting  */
+    Route::resource('setting', SettingController::class);
+
+     /*  control Profile */
+    Route::resource('/profile', AdminProfileController::class);
+
+
 });
 
 
@@ -49,4 +59,4 @@ Route::middleware('auth')->group(function () {
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
