@@ -23,4 +23,12 @@ class AdminController extends Controller
 
         return redirect('/admin/login');
     }
+
+
+    public function login()
+    {
+        return view('backend.auth.login');
+    }
+
+    
 }
