@@ -1,4 +1,4 @@
- <div class="modal theme-modal fade" id="staticBackdrop" tabindex="-1" role="dialog" aria-modal="true">
+  <div class="modal theme-modal fade" id="staticBackdrop" tabindex="-1" role="dialog" aria-modal="true">
         <div class="modal-dialog modal-md modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -11,10 +11,12 @@
                     <p class="mb-0">Are you sure you want to log out?</p>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-cancel" type="button" data-bs-dismiss="modal"
-                        aria-label="Close">No</button>
-                    <button class="btn btn-submit" type="submit" data-bs-dismiss="modal" aria-label="Close"><a
-                            href="login.html">Yes</a></button>
+                    <button class="btn btn-cancel" type="button" data-bs-dismiss="modal" aria-label="Close">No</button>
+                       <form method="POST" action="{{ route('admin.logout') }}">
+                            @csrf
+                             <button class="btn btn-submit" type="submit" data-bs-dismiss="modal" aria-label="Close">Yes</button>
+                        </form>
+
                 </div>
             </div>
         </div>

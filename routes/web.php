@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified', 'roles:admin'])->prefix('admin')->name('admin.')->group(function () {
  Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+   Route::post('/logout', [AdminController::class, 'destroy'])->name('logout');
 });
 
 Route::get('/', function () {
