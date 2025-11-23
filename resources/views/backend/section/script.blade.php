@@ -74,3 +74,51 @@
          }
      });
  </script>
+
+
+<!----Sweet Alert---->
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+
+
+<!----Sweet alert toast script--->
+
+@if (session('success'))
+    <script>
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            text: '{{ session('success') }}',
+            icon: 'success',
+            background: '#282828',
+            color: '#d5d5d5',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+
+        });
+    </script>
+@endif
+
+
+@if (session('error'))
+    <script>
+        Swal.fire({
+            title: 'Error!',
+            toast: true,
+             position: 'top-end',
+            text: '{{ session('error') }}',
+            icon: 'error',
+            background: '#282828',
+            color: '#d5d5d5',
+            confirmButtonColor: '#d33',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+
+        });
+    </script>
+@endif
+
+
+@stack('scripts')

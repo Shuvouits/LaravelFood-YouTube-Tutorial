@@ -21,6 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'avatar',
+        'phone',
+        'address',
+        'role'
     ];
 
     /**
@@ -33,7 +37,7 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-     // Helper methods for role checking
+    // Helper methods for role checking
 
     public function isAdmin()
     {
