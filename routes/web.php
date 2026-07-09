@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\AdminProfileController;
 use App\Http\Controllers\backend\AdminController;
+use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\backend\SettingController;
 use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\ProfileController;
@@ -21,6 +22,12 @@ Route::middleware(['auth', 'verified', 'roles:admin'])->prefix('admin')->name('a
 
      /*  control Profile */
     Route::resource('profile', AdminProfileController::class);
+
+    /*  Category Controller */
+    Route::resource('category', CategoryController::class);
+
+    Route::post('/category/bulk-delete', [CategoryController::class, 'bulkDelete'])->name('category.bulk-delete');
+
 
 
 });

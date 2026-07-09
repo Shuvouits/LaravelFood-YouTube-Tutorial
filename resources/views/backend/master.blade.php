@@ -2,7 +2,11 @@
 <html lang="en" dir="ltr">
 
 <head>
+
     @include('backend.section.link')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+
 </head>
 
 <body class="dark-only">
@@ -14,53 +18,46 @@
 
     <!-- loader start -->
     <div class="loader-wrapper">
-        <img src="{{ asset('backend/assets/images/loader.gif') }}" alt="">
+        <img src="{{asset('backend/assets/images/loader.gif')}}" alt="">
     </div>
     <!-- loader end -->
 
     <!-- page-wrapper Start-->
     <div class="page-wrapper compact-wrapper" id="pageWrapper">
-
         <!-- Page Header Start-->
+
         @include('backend.section.header')
         <!-- Page Header Ends-->
 
         <!-- Page Body Start-->
         <div class="page-body-wrapper">
-
             <!-- Page Sidebar Start-->
-            @include('backend.section.sidebar')
+             @include('backend.section.sidebar')
             <!-- Page Sidebar Ends-->
 
             <!-- index body start -->
             <div class="page-body">
-
-                @yield('content')
+                @yield('main')
                 <!-- Container-fluid Ends-->
 
                 <!-- footer start-->
-                <div class="container-fluid">
-                    @include('backend.section.footer')
-                </div>
-                <!-- footer End-->
 
+                @include('backend.section.footer')
+                <!-- footer End-->
             </div>
             <!-- index body end -->
 
         </div>
         <!-- Page Body End -->
-
-
     </div>
     <!-- page-wrapper End-->
 
     <!-- Modal Start -->
+
     @include('backend.section.modal')
-
-
     <!-- Modal End -->
 
-    @include('backend.section.script')
+   @include('backend.section.script')
 </body>
 
 </html>

@@ -2,34 +2,31 @@
 
 namespace App\Traits;
 
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\File;
+
 trait FileUploadTrait
 {
-    public function uploadFile($file, $folder, $existingFile = null)
+    public function uploadFile(?UploadedFile $file, string $folder, ?string $oldFile = null): ?string
     {
-        if ($file) {
-            // Define the target directory
-            $targetFolder = public_path("upload/{$folder}");
-
-            // Ensure the folder exists
-            if (!file_exists($targetFolder)) {
-                mkdir($targetFolder, 0755, true);
-            }
-
-            // Delete existing file if present
-            if ($existingFile && file_exists(public_path(parse_url($existingFile, PHP_URL_PATH)))) {
-                unlink(public_path(parse_url($existingFile, PHP_URL_PATH)));
-            }
-
-            // Generate a unique filename
-            $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
-
-            // Move the uploaded file to the target folder
-            $file->move($targetFolder, $fileName);
-
-            // Return the full public URL
-            return url("upload/{$folder}/{$fileName}");
+        if (!$file) {
+            return $oldFile;
         }
 
-        return $existingFile;
+        $destinationPath = public_path('uploads/' . $folder);
+
+        if (!File::exists($destinationPath)) {
+            File::makeDirectory($destinationPath, 0755, true);
+        }
+
+        if ($oldFile && File::exists(public_path($oldFile))) {
+            File::delete(public_path($oldFile));
+        }
+
+        $fileName = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+
+        $file->move($destinationPath, $fileName);
+
+        return 'uploads/' . $folder . '/' . $fileName;
     }
 }
