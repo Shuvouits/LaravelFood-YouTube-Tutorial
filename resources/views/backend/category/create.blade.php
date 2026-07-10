@@ -17,7 +17,7 @@
                              <h5>Category Information</h5>
                          </div>
                          <div class="card-body">
-                            
+
                              <form action="{{route('admin.category.store')}}" method="post" enctype="multipart/form-data">
 
                                  @csrf
@@ -57,8 +57,24 @@
 
                                          <div class="col-12">
                                              <div class="input-box">
-                                                 <h6>Image</h6>
-                                                 <input type="file" name="image" class="imageInput" data-preview="#firstPreview" accept="image/*" >
+
+                                                <img
+    id="firstPreview"
+    src="#"
+    alt="Image Preview"
+    style="display:none; height:150px; width:150px; object-fit:cover; border-radius:75px; margin-top:10px;"
+>
+
+<input
+    type="file"
+    name="image"
+    class="imageInput"
+    data-preview="#firstPreview"
+    accept="image/*"
+>
+
+
+
                                              </div>
                                          </div>
 
@@ -122,6 +138,40 @@
          });
      });
  </script>
+
+
+<script>
+$(document).ready(function () {
+    $('.imageInput').on('change', function () {
+        const input = this;
+        const previewSelector = $(this).data('preview');
+        const preview = $(previewSelector);
+
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+
+            if (!file.type.startsWith('image/')) {
+                preview.attr('src', '#').hide();
+                input.value = '';
+                alert('Please select a valid image file.');
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = function (event) {
+                preview
+                    .attr('src', event.target.result)
+                    .css('display', 'block');
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            preview.attr('src', '#').hide();
+        }
+    });
+});
+</script>
 
 
 
