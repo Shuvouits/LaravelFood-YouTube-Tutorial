@@ -76,6 +76,30 @@
  </script>
 
 
+<!----Image Preview---->
+
+
+
+<script>
+    $(document).ready(function() {
+        $('input[type="file"].imageInput').on('change', function(event) {
+            const file = event.target.files[0];
+            const target = $(this).data('preview'); // e.g. "#firstPreview"
+
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    $(target).attr('src', e.target.result).show();
+                };
+                reader.readAsDataURL(file);
+            } else {
+                $(target).hide();
+            }
+        });
+    });
+</script>
+
+
 <!----Sweet Alert---->
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
